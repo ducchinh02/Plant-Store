@@ -3,7 +3,7 @@ import { auth } from "@/configs/firebase";
 
 const requiredAuth = (to, from, next) => {
   const userData = auth.currentUser;
-  if (!userData) next({ name: "login", params: {} });
+  if (!userData) next({ name: "intro", params: {} });
   else next();
 };
 
