@@ -1,20 +1,94 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import { auth } from "@/configs/firebase";
 
+const requiredAuth = (to, from, next) => {
+  const userData = auth.currentUser;
+  if (!userData) next({ name: "login", params: {} });
+  else next();
+};
+
+const checkAuth = (to, from, next) => {
+  const userData = auth.currentUser;
+  if (userData) next({ name: "home", params: {} });
+  else next();
+};
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: () => import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+    beforeEnter: requiredAuth,
+    meta: {
+      layout: "auth",
+    },
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/login",
+    name: "login",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "login" */ "@/views/Login.vue"),
+    beforeEnter: checkAuth,
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: () =>
+      import(/*webpackChunkName : "logout" */ "@/views/Logout.vue"),
+  },
+  {
+    path: "/sign-up",
+    name: "register",
+    component: () =>
+      import(/* webpackChunkName: "register" */ "@/views/Register.vue"),
+    beforeEnter: checkAuth,
+  },
+  {
+    path: "/intro",
+    name: "intro",
+    component: () =>
+      import(/* webpackChunkName: "intro" */ "@/views/IntroScreen.vue"),
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import(/* webpackChunkName: "cart" */ "@/views/Cart.vue"),
+    meta: {
+      layout: "auth",
+    },
+    beforeEnter: requiredAuth,
+  },
+  {
+    path: "/wishlist",
+    name: "wishlist",
+    component: () =>
+      import(/* webpackChunkName: "wishlist" */ "@/views/WishList.vue"),
+    meta: {
+      layout: "auth",
+    },
+    beforeEnter: requiredAuth,
+  },
+  {
+    path: "/wallet",
+    name: "wallet",
+    component: () =>
+      import(/* webpackChunkName: "wallet" */ "@/views/MyWallet.vue"),
+    meta: {
+      layout: "auth",
+    },
+    beforeEnter: requiredAuth,
+  },
+  {
+    path: "/PlantDetail/:id",
+    name: "plant-detail",
+    component: () =>
+      import(/* webpackChunkName: "plant-detail" */ "@/views/PlantDetail.vue"),
+    beforeEnter: requiredAuth,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () =>
+      import(/* webpackChunkName: "not found" */ "@/views/PageNotFound.vue"),
   },
 ];
 
@@ -24,3 +98,5 @@ const router = createRouter({
 });
 
 export default router;
+
+// firebase@8.10.0
