@@ -15,17 +15,12 @@
                 class="w-8 h-8"
               />
             </div>
-            <div class="user-name text-main_black capitalize text-xl font-bold">
+            <div
+              v-if="userName"
+              class="user-name text-main_black capitalize text-xl font-bold"
+            >
               {{ userName }}
             </div>
-          </div>
-        </template>
-        <template v-slot:content-right>
-          <div
-            @click="showModalLogout"
-            class="flex items-center cursor-pointer hover:text-green text-3xl text-main_black transition-all duration-300"
-          >
-            <i class="bx bx-log-out"></i>
           </div>
         </template>
       </header-main>
@@ -78,14 +73,18 @@
               </div>
             </div>
             <div class="sale-thumb relative flex-[0 0 50%] w-1/2">
-              <div class="sale-img w-full left-0 absolute bottom-[-20px]">
+              <div
+                class="sale-img w-full left-0 absolute bottom-[-20px] md:w-[170px] md:h-[220px] md:left-1/2 md:-translate-x-1/2"
+              >
                 <router-link
+                  class="flex h-full"
                   :to="{
                     name: 'plant-detail',
                     params: { id: plants[onSaleIndex].id },
                   }"
                 >
                   <img
+                    class="w-full h-full object-contain"
                     :src="plants[onSaleIndex].image"
                     :alt="plants[onSaleIndex].name"
                   />
@@ -119,41 +118,6 @@
         </ul>
       </div>
     </div>
-    <!-- modal -->
-    <transition name="slide-bottom">
-      <modal-bottom v-if="showModal">
-        <div class="text-error">Logout</div>
-        <template v-slot:actions>
-          <div
-            class="grid grid-cols-1 gap-[30px] mt-[28px] py-7 border-b border-t border-slate-300"
-          >
-            <div class="text-center font-bold text-xl">
-              Are you sure you want to log out?
-            </div>
-            <div class="btn-actions grid grid-cols-2 gap-[15px]">
-              <primary-button
-                type="button"
-                class="cancel-logout"
-                @click="showModal = false"
-              >
-                Cancel
-              </primary-button>
-              <primary-button
-                type="button"
-                class="capitalize"
-                @click="onLogout"
-              >
-                Yes, Logout
-              </primary-button>
-            </div>
-          </div>
-        </template>
-      </modal-bottom>
-    </transition>
-    <!-- overlay -->
-    <transition name="fade">
-      <overlay @click="showModal = false" v-if="showModal" />
-    </transition>
   </div>
 </template>
 
@@ -165,19 +129,12 @@ import SunAndMoon from "@/components/Icons/SunAndMoon.vue";
 import PlantsSlider from "@/components/PlantsSlider.vue";
 import { ref, reactive, computed, onUnmounted } from "vue";
 import { PLANTS } from "@/data";
-import ModalBottom from "@/components/ModalBottom.vue";
-import Overlay from "@/components/Overlay.vue";
-import PrimaryButton from "@/components/PrimaryButton.vue";
-import { useRouter } from "vue-router";
 export default {
   name: "HomeView",
   components: {
     HeaderMain,
-    ModalBottom,
-    Overlay,
     SunAndMoon,
     PlantsSlider,
-    PrimaryButton,
   },
   setup(props, { emit }) {
     const onSaleIndex = 2;
@@ -186,6 +143,7 @@ export default {
     // user data
     const { getUser } = useUser();
     const { userData } = getUser();
+    const userName = ref(null);
 
     // display time - icon
     const time = ref("");
@@ -193,25 +151,16 @@ export default {
     const date = new Date();
     const hour = date.getHours();
     // display user name
-    const splitName = userData.value.displayName.split(" ");
-    const userName = splitName
-      .slice(splitName.length - 2, splitName.length)
-      .join(" ");
+    if (userData.value) {
+      const splitName = userData.value.displayName.split(" ");
+      userName.value = splitName
+        .slice(splitName.length - 2, splitName.length)
+        .join(" ");
+    }
 
     const searchValue = ref("");
     const isSearching = ref(false);
     const plants = reactive(PLANTS);
-
-    const router = useRouter();
-    const showModal = ref(false);
-
-    const showModalLogout = () => {
-      showModal.value = true;
-    };
-
-    const onLogout = () => {
-      router.push({ name: "logout", params: {} });
-    };
 
     const listResult = computed(() =>
       plants.filter(
@@ -261,9 +210,6 @@ export default {
       onSaleIndex,
       listResult,
       onSearch,
-      showModal,
-      showModalLogout,
-      onLogout,
     };
   },
 };
@@ -306,49 +252,5 @@ export default {
   to {
     opacity: 1;
   }
-}
-.modal-bottom {
-  .btn-actions {
-    .cancel-logout {
-      color: $green !important;
-      background: #e6f8ef !important ;
-    }
-  }
-}
-.fade-enter-active {
-  animation: fade 0.5s ease-in-out;
-  -webkit-animation: fade 0.5s ease-in-out;
-}
-.fade-leave-active {
-  animation: fade 0.5s ease-in-out reverse;
-  -webkit-animation: fade 0.5s ease-in-out reverse;
-}
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-.slide-bottom-enter-active {
-  animation: slideBottom 0.4s ease-in-out;
-  -webkit-animation: slideBottom 0.4s ease-in-out;
-}
-@keyframes slideBottom {
-  0% {
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-.slide-bottom-leave-active {
-  animation: slideBottom 0.4s ease-in-out reverse;
-  -webkit-animation: slideBottom 0.4s ease-in-out reverse;
 }
 </style>

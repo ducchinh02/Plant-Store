@@ -19,7 +19,9 @@
         <div class="md:w-[40%]">
           <!-- from image -->
           <div class="form-image mx-auto py-[20px]">
-            <img src="@/assets/images/PlantLogo.svg" alt="form image" />
+            <router-link :to="{ name: 'intro', params: {} }">
+              <img src="@/assets/images/PlantLogo.svg" alt="form image" />
+            </router-link>
           </div>
           <!-- heading -->
           <div

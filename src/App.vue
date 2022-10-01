@@ -32,7 +32,7 @@ export default {
     onMounted(() => {
       setTimeout(() => {
         isLoading.value = false;
-      }, 2000);
+      }, 1000);
     });
     const onFocusInput = (data) => {
       onFocus.value = data;

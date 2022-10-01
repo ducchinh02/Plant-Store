@@ -20,7 +20,7 @@
           <transition name="scale-fade">
             <span
               class="flex items-center justify-center text-[10px] translate-x-1/2 font-bold text-white bg-error w-4 h-4 absolute top-0 right-0 rounded-full"
-              v-if="cart.length > 0"
+              v-if="cart && cart.length > 0"
             >
               {{ cart.length }}
             </span>
@@ -34,21 +34,7 @@
           ><i class="bx bxs-heart"></i>
         </router-link>
       </li>
-      <!-- <li>
-        <router-link
-          :to="{ name: 'wallet', params: {} }"
-          class="flex items-center text text-3xl text-text_gray_bold transition-all duration-300"
-          ><i class="bx bxs-wallet"></i>
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          :to="{ name: 'logout', params: {} }"
-          class="flex items-center text text-3xl text-text_gray_bold transition-all duration-300"
-          ><i class="bx bx-log-out"></i>
-        </router-link>
-      </li> -->
-      <user-avatar />
+      <user-avatar v-if="cart" class="w-12 h-12" />
     </ul>
   </nav>
 </template>

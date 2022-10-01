@@ -1,23 +1,15 @@
-export const Navbar = [
+export const profileMenu = [
   {
-    name: "home",
+    name: "order",
+    route: "cart",
     params: {},
-    icon: "home-alt-2",
-  },
-  {
-    name: "cart",
-    params: {},
-    icon: "cart",
-  },
-  {
-    name: "wishlist",
-    params: {},
-    icon: "heart",
+    icon: "bx bx-package",
   },
   {
     name: "wallet",
+    route: "wallet",
     params: {},
-    icon: "wallet",
+    icon: "bx bx-wallet-alt",
   },
 ];
 

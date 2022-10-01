@@ -1,11 +1,10 @@
 <template>
-  <router-link to="" class="flex">
-    <div class="user-avatar w-12 h-12 overflow-hidden rounded-full">
+  <router-link :to="{ name: 'profile', params: {} }" class="flex">
+    <div class="user-avatar w-100 h-100 overflow-hidden rounded-full">
       <img
-        :src="userAvatar"
-        v-if="userAvatar"
-        alt=""
-        class="object-cover h-full"
+        :src="imageURL"
+        alt="User avatar"
+        class="object-cover w-full h-full"
       />
     </div>
   </router-link>
@@ -14,7 +13,7 @@
 <script>
 export default {
   props: {
-    userAvatar: {
+    imageURL: {
       type: String,
       required: false,
       default: require("@/assets/images/Indoor.svg"),

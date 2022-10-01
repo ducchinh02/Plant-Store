@@ -18,7 +18,7 @@
       </header-main>
       <!-- heading -->
       <div class="heading-text text-center capitalize flex flex-col gap-[5px]">
-        <h1 class="text-[42px] pt-20 leading-[60px] text-black font-medium">
+        <h1 class="text-[42px] pt-16 leading-[60px] text-black font-medium">
           Register
         </h1>
         <p class="text-text_gray_bold font-medium text-xl">
@@ -102,28 +102,30 @@
           <span class="text-green"> By signing you agree to our </span> term of
           use and privacy notice
         </div>
-        <div class="form-image mx-auto py-[20px]">
-          <img src="@/assets/images/form-image.svg" alt="form image" />
-        </div>
-        <div
-          class="flex flex-col items-center md:grid md:grid-cols-2 md:gap-[22px] gap-[18px] pb-[58px]"
-        >
-          <primary-button
-            class="w-full capitalize cursor-pointer transition-all duration-300"
-            type="submit"
-            :class="{ 'bg-greenBold pointer-events-none': showToast }"
+        <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+          <div class="form-image mx-auto py-[20px]">
+            <img src="@/assets/images/form-image.svg" alt="form image" />
+          </div>
+          <div
+            class="flex flex-col justify-center items-center md:gap-[22px] gap-[18px] md:pb-0 pb-[58px]"
           >
-            <span v-if="!isPending">Sign up</span>
-            <circle-loading v-else />
-          </primary-button>
-          <div class="text-text_gray font-medium text-center">
-            Already have an account
-            <router-link
-              class="text-green font-medium decoration-green underline"
-              :to="{ name: 'login', params: {} }"
+            <primary-button
+              class="w-full md:w-3/5 capitalize cursor-pointer transition-all duration-300"
+              type="submit"
+              :class="{ 'bg-greenBold pointer-events-none': showToast }"
             >
-              Login
-            </router-link>
+              <span v-if="!isPending">Sign up</span>
+              <circle-loading v-else />
+            </primary-button>
+            <div class="text-text_gray font-medium text-center">
+              Already have an account
+              <router-link
+                class="text-green font-medium decoration-green underline"
+                :to="{ name: 'login', params: {} }"
+              >
+                Login
+              </router-link>
+            </div>
           </div>
         </div>
       </form>

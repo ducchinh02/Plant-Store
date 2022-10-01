@@ -41,7 +41,7 @@
               class="flex items-center"
             >
               <div
-                class="plant-thumb w-full h-[160px] flex items-center bg-[#f8f8f8] rounded-3xl"
+                class="plant-thumb relative overflow-hidden w-full h-[160px] flex items-center bg-[#f8f8f8] rounded-3xl"
               >
                 <img
                   :src="plant.image"
@@ -56,20 +56,19 @@
             >
               <i class="bx bxs-heart"></i>
             </div>
+
             <div class="plant-detail flex flex-col">
-              <div
+              <router-link
+                :to="{ name: 'plant-detail', params: { id: plant.id } }"
                 class="plant-name py-2 font-bold capitalize text-main_black text-base whitespace-nowrap"
               >
                 {{ plant.name }}
-              </div>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center font-medium gap-1 text-base">
-                  <i class="bx bxs-star text-green"></i>
-                  <span>0</span>
-                </div>
-                <div class="plant-price font-medium text-green">
-                  ${{ plant.price }}
-                </div>
+              </router-link>
+
+              <div
+                class="plant-price text-base w-max px-4 rounded-2xl bg-green font-bold text-white"
+              >
+                ${{ plant.price }}
               </div>
             </div>
           </li>

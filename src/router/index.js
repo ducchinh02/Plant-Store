@@ -17,7 +17,6 @@ const routes = [
     path: "/",
     name: "home",
     component: () => import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
-    beforeEnter: requiredAuth,
     meta: {
       layout: "auth",
     },
@@ -83,6 +82,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "plant-detail" */ "@/views/PlantDetail.vue"),
     beforeEnter: requiredAuth,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () =>
+      import(/* webpackChunkName: "profile" */ "@/views/UserProfile.vue"),
+    beforeEnter: requiredAuth,
+    meta: {
+      layout: "auth",
+    },
   },
   {
     path: "/:pathMatch(.*)*",
