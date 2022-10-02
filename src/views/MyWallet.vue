@@ -5,7 +5,7 @@
     <div class="container flex flex-col md:h-full px-[30px] pt-[30px] mx-auto">
       <header-main class="pb-[40px]">
         <template v-slot:content-left>
-          <div class="flex items-end gap-2 my-cart">
+          <div class="flex items-center gap-2 my-cart">
             <div class="logo w-8">
               <img src="@/assets/images/PlantLogo.svg" alt="" />
             </div>
@@ -21,11 +21,19 @@
         >
           <img src="@/assets/images/credit-card.webp" alt="" />
         </div>
-        <h1
-          class="font-bold animate-slide-bottom opacity-0 animate-delay-200 translate-y-full md:text-2xl text-xl text-center"
-        >
-          Coming <span class="text-green">Soon...</span>
-        </h1>
+        <div class="text-center capitalize">
+          <h1
+            class="font-bold animate-slide-bottom opacity-0 animate-delay-200 translate-y-full text-2xl pb-3"
+          >
+            Coming Soon...
+          </h1>
+          <p
+            class="text-main_black animate-slide-bottom opacity-0 animate-delay-400 translate-y-full"
+          >
+            Online payment functionality is being developed. We will be back
+            shortly.
+          </p>
+        </div>
       </div>
     </div>
   </div>

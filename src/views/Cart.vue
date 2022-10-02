@@ -50,7 +50,7 @@
                 @active-remove="activeRemove"
               />
             </transition-group>
-            <router-link to="" class="flex">
+            <router-link :to="{ name: 'checkout', params: {} }" class="flex">
               <div
                 class="payment-btn flex items-center justify-center capitalize flex-1 gap-1 px-5 py-4 text-center font-medium bg-green rounded-3xl text-white"
               >

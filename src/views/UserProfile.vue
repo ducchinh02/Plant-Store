@@ -44,7 +44,7 @@
               <label
                 @click="changeType"
                 for="username"
-                class="icon flex cursor-pointer items-center text-2xl transition-all"
+                class="icon flex cursor-pointer items-center text-2xl"
                 ><i class="bx bx-edit-alt"></i
               ></label>
             </form>
@@ -65,13 +65,15 @@
             >
               <router-link
                 :to="{ name: menu.route, params: {} }"
-                class="menu-link font-normal hover:text-green transition-all duration-300"
+                class="menu-link font-normal"
               >
                 <i
                   :class="menu.icon"
-                  class="flex justify-center items-center text-3xl"
+                  class="flex justify-center transition-all duration-300 items-center text-3xl text-main_black opacity-75"
                 ></i>
-                <span class="capitalize font-medium pt-2">
+                <span
+                  class="capitalize transition-all duration-300 font-normal pt-2"
+                >
                   {{ menu.name }}
                 </span>
               </router-link>
@@ -83,7 +85,7 @@
                 <i
                   class="bx bx-log-out text-3xl flex justify-center items-center"
                 ></i
-                ><span class="capitalize font-medium pt-2"> Logout </span>
+                ><span class="capitalize font-normal pt-2"> Logout </span>
               </div>
             </li>
           </ul>
@@ -187,7 +189,6 @@ export default {
       if (selected && fileType.includes(selected.type)) {
         file.value = selected;
         errorFile.value = null;
-        console.log(file.value);
       } else {
         file.value = null;
         showToast.value = true;
@@ -219,6 +220,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.user-menu {
+  a:hover {
+    i,
+    span {
+      color: $green;
+    }
+  }
+}
+
 .hide-toast-leave-active {
   animation: hideToast 0.5s ease-in-out;
   -webkit-animation: hideToast 0.5s ease-in-out;

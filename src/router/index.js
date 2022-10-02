@@ -94,6 +94,13 @@ const routes = [
     },
   },
   {
+    path: "/check-out",
+    name: "checkout",
+    component: () =>
+      import(/* webpackChunkName: "checkout" */ "@/views/CheckoutPage.vue"),
+    beforeEnter: requiredAuth,
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () =>

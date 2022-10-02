@@ -1,8 +1,8 @@
 <template>
+  <!-- :loop="true" -->
   <swiper
     grab-cursor
     :slides-per-view="1.5"
-    :loop="true"
     :space-between="35"
     @swiper="onSwiper"
     @slideChange="onSlideChange"
