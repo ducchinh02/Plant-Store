@@ -42,8 +42,8 @@
             >
               <cart-item
                 comp="li"
-                :plant="plant"
                 v-for="plant in cart"
+                :plant="plant"
                 :key="plant.id"
                 @incr-quantity="incrQuantity"
                 @desc-quantity="descQuantity"
